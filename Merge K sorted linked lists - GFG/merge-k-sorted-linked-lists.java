@@ -82,7 +82,7 @@ class GfG
 class Solution
 {
     //Function to merge K sorted linked list.
-     public static Node merge(Node a, Node b){
+     Node merge(Node a, Node b){
         
             if(a==null){
                 return b;
