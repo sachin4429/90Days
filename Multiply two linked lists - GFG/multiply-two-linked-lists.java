@@ -83,16 +83,16 @@ class GfG{
           {
               if(l1 != null)
               {
-                  num1 = ((num1*10) + l1.data)%N;
+                  num1 = ((num1*10)%N + l1.data)%N;
                   l1 = l1.next;
               }
               if(l2 != null)
               {
-                  num2 = ((num2*10) + l2.data)%N;
+                  num2 = ((num2*10)%N + l2.data)%N;
                   l2 = l2.next;
               }
           }
           
-          return (num1*num2)%N;
+          return (num1%N*num2%N)%N;
    }
 }
