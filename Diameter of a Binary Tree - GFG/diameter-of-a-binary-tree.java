@@ -116,13 +116,13 @@ class GfG {
 
 class Solution {
     // Function to return the diameter of a Binary Tree.
-   int ans=0;
-   int diameter(Node root) {
-       // Your code here
-       height(root);
+    int ans = 0;
+    int diameter(Node root) {
+        // Your code here
+         height(root);
           return ans;
-   }
-   int height(Node root){
+    }
+    int height(Node root){
        if(root == null) return 0;
        int l=height(root.left);
        int r=height(root.right);
