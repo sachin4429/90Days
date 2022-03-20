@@ -120,33 +120,20 @@ class Node
 
 class Solution
 {
-    void height(Node root,HashMap<Integer,ArrayList<Integer>> map,int h)
-     {
-         if(root==null)
-         {
-             return;
-         }
-         if(root.left==null && root.right==null && !map.containsKey(h))
-         {
-           ArrayList<Integer> list= new ArrayList<Integer>();
-           list.add(root.data);
-            map.put(h,list);
-          
-         }
-         if(root.left==null && root.right==null && map.containsKey(h))
-         {
-            map.get(h).add(root.data);
-         }
-         height(root.left,map,h+1);
-         height(root.right,map,h+1);
-     }
+    int height(Node n)
+    {
+        if(n == null)
+            return -1;
+        int l = height(n.left);
+        int r = height(n.right);
+        return Math.max(l,r) + 1;
+    }
     boolean check(Node root)
     {
-        HashMap<Integer,ArrayList<Integer>> map=new HashMap<>();
-        height(root,map,0);
-        if(map.size()==1)  return true;
-        else return false;
-          
-        
+        if(root == null) return true;
+        int l=height(root.left), r=height(root.right);
+        if(l!=-1&&r!=-1) return l==r&&check(root.left)&&check(root.right); 
+        else if(l!=-1) return r==-1&&check(root.left)&&check(root.right);
+        else return l==-1&&check(root.left)&&check(root.right);
     }
 }
