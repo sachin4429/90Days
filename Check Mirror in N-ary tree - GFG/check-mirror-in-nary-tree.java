@@ -46,7 +46,6 @@ class Solution {
             hs.put(arr1[i-1],st);
         }
         for(int i=1;i<2*e;i+=2){
-            int k=arr2[i];
             Stack<Integer> st=hs.getOrDefault(arr2[i-1],new Stack<>());
                 int ele=-1;
                 if(st.size()>0)
