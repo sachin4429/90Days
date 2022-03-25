@@ -41,7 +41,6 @@ class Solution {
         // code here
         Map<Integer,Stack<Integer>> hs=new LinkedHashMap<>();
         for(int i=1;i<2*e;i+=2){
-            int k=arr1[i];
             Stack<Integer> st=hs.getOrDefault(arr1[i-1],new Stack<>());
             st.push(arr1[i]);
             hs.put(arr1[i-1],st);
