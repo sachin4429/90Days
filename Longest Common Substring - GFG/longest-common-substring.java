@@ -32,6 +32,7 @@ class Solution{
     int longestCommonSubstr(String S1, String S2, int n, int m){
         // code here
         int t[][] = new int[n+1][m+1];
+        int max=Integer.MIN_VALUE;
         for(int i = 1; i<n+1; i++)
         {
             for(int j = 1; j<m+1; j++)
@@ -40,19 +41,13 @@ class Solution{
                     t[i][j] = 1+t[i-1][j-1];
                 else
                     t[i][j] = 0;
-            }
-        }
-         int max=Integer.MIN_VALUE;
-          for(int i=0;i<=n;i++)
-          {
-              for(int j=0;j<=m;j++)
-              {
-                 if(t[i][j]>max)
+                if(t[i][j]>max)
                  {
                      max=t[i][j];
                  }
-              }
-          }
+            }
+        }
+          
           return max;
     }
 }
