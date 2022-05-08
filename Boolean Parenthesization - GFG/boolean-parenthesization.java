@@ -23,74 +23,57 @@ class GFG{
 //User function Template for Java
 
 class Solution{
-  static int helper(String S,int i,int j,boolean flag,Map<String,Integer> mp){
-      
-      if(i>j) return 0;
-      
-      if(i==j){
-          if(flag==true){
-              return (S.charAt(i)=='T') ? 1 : 0;
-          }
-          else{
-              return (S.charAt(i)=='F') ? 1 : 0;
-          }
-      }
-      
-      StringBuilder sb=new StringBuilder();
-      sb.append(Integer.toString(i));
-      sb.append(" ");
-      sb.append(Integer.toString(j));
-      sb.append(" ");
-      sb.append(Boolean.toString(flag));
-      String temp=sb.toString();
-      
-      int ans=0;
-      
-      if(mp.containsKey(temp)){
-          return mp.get(temp);
-      }
-      
-      for(int k=i+1;k<j;k+=2){
-          
-          int lt=helper(S,i,k-1,true,mp);
-          int lf=helper(S,i,k-1,false,mp);
-          int rt=helper(S,k+1,j,true,mp);
-          int rf=helper(S,k+1,j,false,mp);
-          
-          if(S.charAt(k)=='&'){
-              if(flag==true){
-                  ans+=(lt*rt);
-              }
-              else{
-                  ans+=(lt*rf)+(rt*lf)+(rf*lf);
-              }
-          }
-          
-          else if(S.charAt(k)=='|'){
-              if(flag==true){
-                  ans+=(lt*rt)+(lt*rf)+(rt*lf);
-              }
-              else{
-                  ans+=(lf*rf);
-              }
-          }
-          
-          else if(S.charAt(k)=='^'){
-              if(flag==true){
-                  ans+=(lt*rf)+(lf*rt);
-              }
-              else{
-                  ans+=(lf*rf)+(rt*lt);
-              }
-          }
-      }
-      
-      mp.put(temp,ans%1003);
-      return mp.get(temp);
-  }
-  static int countWays(int N, String S){
-      // code here
-      Map<String,Integer> mp=new HashMap<>();
-      return helper(S,0,S.length()-1,true,mp);
-  }
+   static int countWays(int n, String s){
+       HashMap<String, Integer> mp = new HashMap<>();
+       int res = solve(s,0,n-1,true,mp)%1003;
+       //System.out.println(mp);
+       return res;
+   }
+   static int solve(String s, int i, int j, boolean istrue, HashMap<String, Integer> mp)
+   {
+       if(i>j)
+           return 0;
+       if(i==j)
+       {
+           if(istrue == true)
+               return s.charAt(i) == 'T' ? 1:0;
+           else
+               return s.charAt(i) == 'F' ? 1:0;
+       }
+       String sb = String.valueOf(i)+String.valueOf(j)+String.valueOf(istrue);
+       if(mp.containsKey(sb))
+           return mp.get(sb);
+       int ans = 0;
+       for(int k = i+1; k<=j-1; k+=2)
+       {
+           int lt = solve(s,i,k-1,true,mp);
+           int lf = solve(s,i,k-1,false,mp);
+           int rt = solve(s,k+1,j,true,mp);
+           int rf = solve(s,k+1,j,false,mp);
+           if(s.charAt(k)=='&')
+           {
+               if(istrue == true)
+                   ans += lt*rt;
+               else
+                   ans += lf*rf + lf*rt + lt*rf;
+           }
+           else if(s.charAt(k)=='|')
+           {
+               if(istrue == true)
+                   ans += lt*rt + lf*rt + lt*rf;
+               else
+                   ans += lf*rf;
+           }
+           else if(s.charAt(k)=='^')
+           {
+               if(istrue == true)
+                   ans += lf*rt + lt*rf;
+               else
+                   ans += lf*rf + lt*rt;
+           }
+       }
+       ans = ans%1003;
+       mp.put(sb,ans);
+       return ans%1003;
+   }
 }
