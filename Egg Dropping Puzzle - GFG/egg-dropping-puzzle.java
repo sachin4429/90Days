@@ -57,7 +57,22 @@ class Solution
 	    int mn = Integer.MAX_VALUE;
 	    for(int k = 1; k<=f; k++)
 	    {
-	        int temp = 1+Math.max(solve((e-1),(k-1)), solve(e,(f-k)));
+	        int lh = -1, rh = -1;
+	        if(t[e-1][k-1] != -1)
+	             lh = t[e-1][k-1];
+	        else
+	            {
+	                lh = solve((e-1),(k-1));
+	                t[e-1][k-1] = lh;
+	            }
+	        if(t[e][f-k] != -1)
+	             rh = t[e][f-k];
+	        else
+	            {
+	                rh = solve(e,(f-k));
+	                t[e][f-k] = rh;
+	            }
+	        int temp = 1+Math.max(lh, rh);
 	        mn = Math.min(mn, temp);
 	    }
 	    return t[e][f] = mn;
