@@ -53,16 +53,18 @@ class Solution
         {
             ls.add(new Pair(start[i],end[i]));
         }
-        Collections.sort(ls,new Comparator<Pair>(){
-            public int compare(Pair p1,Pair p2)
-            {
-                if(p1.end==p2.end)
-                    return p1.start-p2.start;
-                return p1.end-p2.end;
-            }
+        
+        Collections.sort(ls,(p1,p2) -> p1.end-p2.end);
+        // Collections.sort(ls,new Comparator<Pair>(){
+        //     public int compare(Pair p1,Pair p2)
+        //     {
+        //         if(p1.end==p2.end)
+        //             return p1.start-p2.start;
+        //         return p1.end-p2.end;
+        //     }
             
-        }    
-        );
+        // }    
+        // );
         int endTime=ls.get(0).end;
         for(int i=1;i<ls.size();i++)
         {
