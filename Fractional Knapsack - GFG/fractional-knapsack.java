@@ -44,29 +44,32 @@ class Item {
 class Solution
 {
     //Function to get the maximum total value in the knapsack.
-    double fractionalKnapsack(int we, Item arr[], int n) 
-    {   double w = (double)we;
+    double fractionalKnapsack(int W, Item arr[], int n) 
+    {
+        double w = (double)W;
         int i;
         double res = 0;
         
         double [][] tem = new double[n][3];
         
-        for(i=0;i<n;i++){
+        for(i=0;i<n;i++)
+        {
             tem[i][0] = (double)arr[i].value / (double)arr[i].weight;
             tem[i][1] = arr[i].value;
             tem[i][2] = arr[i].weight;
         }
-        Arrays.sort(tem, (a, b) -> Double.compare(a[0], b[0]));
-        
-        
-        for(i=n-1;i>=0;i--){
+        Arrays.sort(tem, (a, b) -> -Double.compare(a[0], b[0]));
+        for(i=0;i<n;i++)
+        {
             if(w==0)
                 break;
-            else if(tem[i][2]<=w){
+            else if(tem[i][2]<=w)
+            {
                 res+=tem[i][1];
                 w = w-tem[i][2];
             }
-            else{
+            else
+            {
                 res += tem[i][0] * w;
                 break;
             }
