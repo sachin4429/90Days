@@ -92,7 +92,7 @@ class Solution{
             } else if(arr[mid]<x){
                 low = mid+1;
             } else{
-                if(arr[mid]==0 || mid == n-1 || arr[mid+1]!=arr[mid]){
+                if(mid == n-1 || arr[mid+1]!=arr[mid]){
                     return ans = mid;
                 } else {
                     low = mid+1;
