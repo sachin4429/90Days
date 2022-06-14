@@ -35,30 +35,20 @@ class Solution
     //Function to return the sorted array.
     ArrayList <Integer> nearlySorted(int arr[], int num, int k)
     {
-        PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+        PriorityQueue<Integer> p = new PriorityQueue<Integer>();
         ArrayList<Integer> res = new ArrayList<Integer>();
-        for(int i = 0, j = 0; i<num; i++)
+        for(int i=0;i<=k;i++)
         {
-            if(j<k)
-            {
-                pq.add(arr[i]);
-                j++;
-            }
-            else
-            {
-                pq.add(arr[i]);
-                j++;
-                while(!pq.isEmpty())
-                {
-                    j--;
-                    res.add(pq.remove());
-                }
-            }
+            p.add(arr[i]);
         }
-        
-        while(!pq.isEmpty())
+        for(int j=k+1;j<arr.length;j++)
         {
-            res.add(pq.remove());
+            res.add(p.remove());
+            p.add(arr[j]);
+        }
+        while(p.size()>0)
+        {
+            res.add(p.remove());
         }
         return res;
     }
