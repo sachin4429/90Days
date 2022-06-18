@@ -133,7 +133,7 @@ class Solution {
         Node l = node.left;
         node.left = r;
         node.right = l;
-        mirror(node.right);
         mirror(node.left);
+        mirror(node.right);
     }
 }
